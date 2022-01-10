@@ -1,0 +1,42 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+.information-from-province {
+  border: 3px solid firebrick;
+  display: grid;
+}
+h3 {
+  color: black;
+  font-weight: 600;
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+a {
+  color: lightslategray;
+  text-decoration: none lightblue;
+}
+a:hover {
+  color: darkslateblue;
+}
+a:visited {
+  color: red;
+}
+.footer {
+  background-color: #303846;
+  padding: 25px;
+}
+.footer h3 {
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+ul {
+  display: block;
+}
+li {
+  margin: 10px;
+  display: inline;
+  color: cornflowerblue;
+  font-weight: 400;
+}
