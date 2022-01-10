@@ -3,18 +3,25 @@
  * @author joey@tech-center.com (Joey Cadieux)
  */
 
+// dailyOverview[0] gets the first object, wrapped in braces {}.
+// dailyOverview[1] would get the second object in braces.
+// adding '.cases', '.newCases', etc. gets the property you want.
 
-var totalCases = 0;
-var totalVaccinations = 0;
-var hospitalizations = 0;
+const dailyOverview = [
+  {
+    date: "2022-01-10",
+    cases: 399058,
+    newCases: 879,
+    death: 11312,
+    newDeath: 7,
+  }
+];
 
 
-$(document).ready(() => {
-  $.ajax({
-    url: api_url + "https://api.covid19tracker.ca/summary"
-  }).then(res => {
-    var data = res.data[0];
 
-    document.getElementById("totalCases").innerHTML = dailyOverview[0].totalCases;
-    document.getElementById("totalVaccinations").innerHTML = dailyOverview[0].totalVaccinations;
-    document.getElementById("hospitalizations").innerHTML = dailyOverview[0].hospitalizations;
+// dailyOverview ->
+
+document.getElementById("cases").innerHTML = dailyOverview[0].cases;
+document.getElementById("newCases").innerHTML = dailyOverview[0].newCases;
+document.getElementById("death").innerHTML = dailyOverview[0].death;
+document.getElementById("newDeath").innerHTML = dailyOverview[0].newDeath;
