@@ -11,9 +11,9 @@ const dailyOverview = [
   {
     date: "2022-01-10",
     cases: 2583232,
-    hospitalized: 879,
-    recoveries: 7,
-    death: 11312,
+    hospitalized: 6640,
+    recoveries: 2098701,
+    death: 30851,
   }
 ];
 
