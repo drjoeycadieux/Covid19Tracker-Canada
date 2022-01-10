@@ -10,10 +10,10 @@
 const dailyOverview = [
   {
     date: "2022-01-10",
-    cases: 399058,
-    newCases: 879,
+    cases: 2583232,
+    hospitalized: 879,
+    recoveries: 7,
     death: 11312,
-    newDeath: 7,
   }
 ];
 
@@ -22,6 +22,6 @@ const dailyOverview = [
 // dailyOverview ->
 
 document.getElementById("cases").innerHTML = dailyOverview[0].cases;
-document.getElementById("newCases").innerHTML = dailyOverview[0].newCases;
+document.getElementById("hospitalized").innerHTML = dailyOverview[0].hospitalized;
+document.getElementById("recoveries").innerHTML = dailyOverview[0].recoveries;
 document.getElementById("death").innerHTML = dailyOverview[0].death;
-document.getElementById("newDeath").innerHTML = dailyOverview[0].newDeath;
