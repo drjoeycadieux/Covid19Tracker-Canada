@@ -40,3 +40,7 @@ li {
   color: cornflowerblue;
   font-weight: 400;
 }
+div#covid-info {
+ border: 3px solid rgb(6, 126, 206);
+ display: block;
+}
