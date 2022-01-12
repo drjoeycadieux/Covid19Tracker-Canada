@@ -14,6 +14,7 @@ const dailyOverview = [
     hospitalized: 8241,
     recoveries: 2216562,
     death: 31061,
+    tests: 54958118,
   }
 ];
 
@@ -25,3 +26,4 @@ document.getElementById("cases").innerHTML = dailyOverview[0].cases;
 document.getElementById("hospitalized").innerHTML = dailyOverview[0].hospitalized;
 document.getElementById("recoveries").innerHTML = dailyOverview[0].recoveries;
 document.getElementById("death").innerHTML = dailyOverview[0].death;
+document.getElementById("tests").innerHTML = dailyOverview[0].tests
