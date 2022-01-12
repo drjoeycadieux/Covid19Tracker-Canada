@@ -9,13 +9,21 @@
 
 const dailyOverview = [
   {
-    date: "2022-01-10",
+    date: "2022-01-12",
     cases: 2644481,
     hospitalized: 8241,
     recoveries: 2216562,
     death: 31061,
     tests: 54958118,
-  }
+  },
+  {
+    date: "2022-01-13",
+    cases: 2644481,
+    hospitalized: 8241,
+    recoveries: 2216562,
+    death: 31061,
+    tests: 54958118,
+  },
 ];
 
 
