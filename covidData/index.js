@@ -26,6 +26,24 @@ const dailyOverview = [
     death: 31061,
     tests: 54958118,
   },
+  {
+    date: "2022-01-14",
+    cases: 2644481,
+    hospitalized: 8241,
+    recoveries: 2216562,
+    dosesadministered: 72456220,
+    death: 31061,
+    tests: 54958118,
+  },
+  {
+    date: "2022-01-15",
+    cases: 2644481,
+    hospitalized: 8241,
+    recoveries: 2216562,
+    dosesadministered: 72456220,
+    death: 31061,
+    tests: 54958118,
+  },
 ];
 
 
