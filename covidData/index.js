@@ -37,4 +37,4 @@ document.getElementById("hospitalized").innerHTML = dailyOverview[0].hospitalize
 document.getElementById("recoveries").innerHTML = dailyOverview[0].recoveries;
 document.getElementById("death").innerHTML = dailyOverview[0].death;
 document.getElementById("tests").innerHTML = dailyOverview[0].tests
-document.getElementById("dosesadministered").innerHTML = dailyOverview[0.dosesadministered;
+document.getElementById("dosesadministered").innerHTML = dailyOverview[0].dosesadministered;
