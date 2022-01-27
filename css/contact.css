@@ -1,0 +1,9 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#inner3 {
+  padding: 10px;
+  background-color: orangered;
+}
