@@ -44,3 +44,7 @@ div#covid-info {
  border: 3px solid rgb(6, 126, 206);
  display: block;
 }
+#inner {
+  background-color: firebrick;
+  padding: 10px;
+}
