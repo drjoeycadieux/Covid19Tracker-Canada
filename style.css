@@ -5,6 +5,7 @@ body {
 .information-from-province {
   border: 3px solid firebrick;
   display: grid;
+  border-radius: 5px;
 }
 h3 {
   color: black;
@@ -43,6 +44,7 @@ li {
 div#covid-info {
  border: 3px solid rgb(6, 126, 206);
  display: block;
+ border-radius: 5px;
 }
 #inner {
   background-color: rgb(212, 193, 16);
