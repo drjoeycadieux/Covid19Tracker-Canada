@@ -63,3 +63,7 @@ header h2 {
  font-weight: bold;
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+#inner1 {
+  background-color: darkblue;
+  padding: 10px;
+}
