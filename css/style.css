@@ -52,7 +52,7 @@ div#covid-info {
 }
 header {
   padding: 150px;
-  background-image: url(assets/covid.png);
+  background-image: url(/assets/covid.png);
   background-size: cover;
 	background-repeat: no-repeat;
 }

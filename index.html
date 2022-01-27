@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer">
 
 	</script>
@@ -16,39 +16,185 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/yeti/bootstrap.min.css" integrity="sha384-mLBxp+1RMvmQmXOjBzRjqqr0dP9VHU2tb3FK6VB0fJN/AOu7/y+CAeYeWJZ4b3ii"
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+	<title>Covid19Tracker Canada</title>
 	<link rel="icon" type="image/png" href="favicon.jpg" />
-
-	<meta http-equiv="refresh" content="5 url=https://covid-19trackercanada.netlify.app/owa/index.html" />
-	<title>Covid-19 Tracker | Canada</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-	<div id="header" class="container">
-		<h1 style="font-weight: bold; text-align: center;">Welcome to Covid-19 Tracker Canada</h1>
-		<div style="text-align: center;" id="spinner" class="spinner-border text-primary"></div>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a style="font-weight: bold;" class="navbar-brand" href="/">Covid19Tracker</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-	<style>
-		body {
-			padding: 0;
-			margin: 0;
-		}
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="dataTracker.html">Coronavirus (Data)</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">menu</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="https://github.com/drjoeycadieux/Covid19Tracker-Canada">Github</a>
+            <a class="dropdown-item" href="https://teamlitho.com">TeamLitho</a>
+            <a class="dropdown-item" href="https://stackoverflow.com/users/12696830/joey-cadieux">Stackoverflow</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="source.html">Source</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div id="inner"></div>
+ 
+ <header>
+   <h2>Research and data to make progress against the world’s largest problems</h2>
+   <p id="headerp">Explore the global data on confirmed COVID-19</p>
+   <div class="container">
+  <div class="row">
+    <div class="col">
+      <button onclick="button1()" style="border-radius: 5px; color: white;" class="btn btn-primary">Data Tracker (Coronavirus)</button>
+    </div>
+    <div class="col">
+      <button onclick="button2()" style="border-radius: 5px; color: white;" class="btn btn-primary">Vaccination Tracker</button>
+    </div>
+    <div class="col">
+      <button onclick="button3()" style="border-radius: 5px; color: white;" class="btn btn-primary">Covid Test Tracker</button>
+    </div>
+  </div>
+</div>
+ </header>
 
-		#header {
-			padding: 150px;
-		}
+<br>
 
-		#spinner {
-			position: absolute;
-			height: 100px;
-			width: 100px;
-			top: 50%;
-			left: 50%;
-			margin-left: -50px;
-			margin-top: -50px;
-		}
-	</style>
+<div class="container-sm information-from-province">
+  <span style="font-size: 30px; font-weight: bold;"><i class="bi bi-exclamation-triangle-fill"></i>  Attention</span>
+   <h3>For the most up to date information regarding COVID-19 in Canada, please consult <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html">Canada Deptartment of Health</a>. This site should not be used for life saving information - instead, rather, a source for numbers and statistics.</h3>
+</div>
 
+<br>
+
+<div class="container">
+  <div class="row row-cols-4">
+    <div class="col"> <div class="card bg-warning mb-3" style="max-width: 20rem;">
+  <div class="card-header">Cases | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Cases</h4>
+    <p id="cases" class="card-text">.</p>
+  </div>
+</div></div>
+    <div class="col"> <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
+  <div class="card-header">Hospitalized | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Hospitalized</h4>
+    <p id="hospitalized" class="card-text">.</p>
+  </div>
+</div></div>
+    <div class="col"> <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+  <div class="card-header">Recoveries | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Recoveries</h4>
+    <p id="recoveries" class="card-text">.</p>
+  </div>
+</div></div>
+    <div class="col"><div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Deaths | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Deaths</h4>
+    <p id="death" class="card-text">.</p>
+  </div>
+</div></div>
+ <div class="col"> <div class="card text-black bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Test | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Tests</h4>
+    <p id="tests" class="card-text">.</p>
+  </div>
+</div></div>
+<div class="col"> <div class="card text-black bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Doses Administered | Covid19Tracker</div>
+  <div class="card-body">
+    <h4 class="card-title">Doses Administered</h4>
+    <p id="dosesadministered" class="card-text">.</p>
+  </div>
+</div></div>
+  </div>
+</div>
+
+<br>
+<br>
+  
+  <div class="container mt-4 p-4">
+  <div class="row">
+    <div class="col align-self-start">
+      	<img class="img-responsive" src="/assets/img1.jpg" alt="" width="304" height="236">
+    </div>
+    <div class="col align-self-center">
+      	<img class="img-responsive" src="/assets/img2.png" alt="" width="304" height="236">
+    </div>
+    <div class="col align-self-end">
+     	<img class="img-responsive" src="/assets/img3.jpg" alt="" width="304" height="236">
+    </div>
+  </div>
+</div>
+
+<div id="covid-info" class="container-sm mt-4 p-4">
+    <span style="font-size: 30px; font-weight: bold;"><i class="bi bi-info-lg"></i> Inforamtion About Coronavirus</span>
+  <h3>
+    Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
+Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.
+  </h3>
+</div>
+
+<br>
+<br>
+
+<div id="inner1"></div>
+<div class="footer">
+  <div class="social">
+    <ul>
+      <span style="color: white;">|</span>
+      <li><a href="https://forms.gle/4ZBeajqRt5J1drBq8">Found an Issues</a></li>
+      <span style="color: white;">|</span>
+       <li><a href="mailto:joey@tech-center.com?subject=Mail Covid19Tracker-Canada">Email Us</a></li>
+        <span style="color: white;">|</span>
+    </ul>
+  </div>
+   <hr style="color: white;">
+  <h3>&copy; <script type="text/javascript">document.write(new Date().getFullYear())</script> Covid19Tracker</h3>
+  <p style="color: white; text-align: center;">Designed and built with <i style="color: pink;" class="bi bi-suit-heart-fill"></i>  in Montreal.   // Developed by <a href="https://techwithjoey.com">Joey Cadieux</a></p>
+</div>
+
+<script>
+  function button1() {
+    window.location.assign("https://covid-19trackercanada.netlify.app/dataTracker.html")
+  }
+  function button2() {
+    window.location.assign("https://covid-19trackercanada.netlify.app/")
+  }
+  function button3() {
+    window.location.assign("https://covid-19trackercanada.netlify.app/")
+  }
+</script>
+
+  <script src="/covidData/index.js"></script>
+	<script src="script.js">
+	</script>
 </body>
 
 </html>
