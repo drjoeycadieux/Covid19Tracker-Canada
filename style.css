@@ -45,6 +45,21 @@ div#covid-info {
  display: block;
 }
 #inner {
-  background-color: firebrick;
+  background-color: rgb(212, 193, 16);
   padding: 10px;
+}
+header {
+  padding: 150px;
+  background-image: url(assets/covid.png);
+  background-size: cover;
+	background-repeat: no-repeat;
+}
+header h2 {
+  color: white;
+  font-size: 30px;
+}
+#headerp {
+ color: white;
+ font-weight: bold;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
