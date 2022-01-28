@@ -48,7 +48,7 @@ div#covid-info {
 }
 #inner {
   background-color: rgb(212, 193, 16);
-  padding: 10px;
+  padding: 5px;
 }
 header {
   padding: 150px;
@@ -67,9 +67,9 @@ header h2 {
 }
 #inner1 {
   background-color: darkblue;
-  padding: 10px;
+  padding: 5px;
 }
 #inner3 {
   background-color: darkblue;
-  padding: 10px;
+  padding: 5px;
 }
