@@ -1,206 +1,713 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="COVID-19 Tracker for Canada - Real-time data, statistics, and insights on coronavirus cases, recoveries, and vaccinations across Canada.">
+  <meta name="keywords"
+    content="COVID-19, coronavirus, Canada, tracker, statistics, cases, deaths, recoveries, vaccination">
 
-	</script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	 crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	 crossorigin="anonymous">
+  <!-- Bootstrap 5.3 (Latest) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
-	</script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-	<title>Covid19Tracker Canada</title>
-	<link rel="icon" type="image/png" href="favicon.jpg" />
-	 <link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/sites/all/themes/covidtracker/css-fonts/home.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" referrerpolicy="no-referrer"></script>
+
+  <title>COVID-19 Tracker Canada | Real-time Statistics & Data</title>
+  <link rel="icon" type="image/png" href="favicon.jpg" />
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/sites/all/themes/covidtracker/css-fonts/home.css">
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #3b82f6;
+      --danger-color: #dc2626;
+      --success-color: #059669;
+      --warning-color: #d97706;
+      --info-color: #0891b2;
+      --dark-color: #1f2937;
+      --light-color: #f8fafc;
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark-color);
+      padding-top: 80px;
+      /* Account for fixed navbar */
+    }
+
+    .navbar {
+      background: rgba(31, 41, 55, 0.95) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(30, 64, 175, 0.9) 100%), url('/assets/covid.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 3.5rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-modern {
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-modern:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary-modern {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .btn-outline-modern {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-outline-modern:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    .alert-banner {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      border: none;
+      border-radius: 0;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    .stats-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      border: none;
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .stats-card.warning::before {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    }
+
+    .stats-card.danger::before {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+
+    .stats-card.success::before {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .stats-card.info::before {
+      background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    }
+
+    .stats-card.secondary::before {
+      background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+    }
+
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-label {
+      color: #64748b;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border-left: 5px solid var(--info-color);
+      margin: 2rem 0;
+    }
+
+    .warning-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border-left: 5px solid var(--danger-color);
+      margin: 2rem 0;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .image-gallery img {
+      border-radius: 15px;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .footer {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: white;
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer a {
+      color: #93c5fd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-links a {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-section {
+        min-height: 60vh;
+        padding: 2rem 0;
+      }
+
+      .stats-card {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a style="font-weight: bold;" class="navbar-brand" href="/">Covid-19 Tracker</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="bi bi-shield-check me-2"></i>COVID-19 Tracker
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.html">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="about.html">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact</a>
-        </li>
-         <li class="nav-item">
-          <a class="nav-link" href="dataTracker.html">Coronavirus (Data)</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">menu</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="https://github.com/drjoeycadieux/Covid19Tracker-Canada">Github</a>
-            <a class="dropdown-item" href="https://teamlitho.com">TeamLitho</a>
-            <a class="dropdown-item" href="https://stackoverflow.com/users/12696830/joey-cadieux">Stackoverflow</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="source.html">Source</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">
+              <i class="bi bi-house me-1"></i>Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">
+              <i class="bi bi-info-circle me-1"></i>About
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">
+              <i class="bi bi-envelope me-1"></i>Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dataTracker.html">
+              <i class="bi bi-graph-up me-1"></i>Data Tracker
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="bi bi-grid-3x3-gap me-1"></i>More
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://github.com/drjoeycadieux/Covid19Tracker-Canada">
+                <i class="bi bi-github me-2"></i>GitHub
+              </a>
+              <a class="dropdown-item" href="https://teamlitho.com">
+                <i class="bi bi-people me-2"></i>TeamLitho
+              </a>
+              <a class="dropdown-item" href="https://stackoverflow.com/users/12696830/joey-cadieux">
+                <i class="bi bi-stack-overflow me-2"></i>Stack Overflow
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="source.html">
+                <i class="bi bi-code-slash me-2"></i>Source
+              </a>
+            </div>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Alert Banner -->
+  <div class="alert alert-banner text-center mb-0" role="alert" data-aos="fade-down">
+    <div class="container">
+      <h6 class="mb-0">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        <strong>Updated Daily:</strong>
+        <a href="dataTracker.html" class="btn btn-light btn-sm ms-2">
+          <i class="bi bi-graph-up me-1"></i>View COVID-19 Data
+        </a>
+      </h6>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8 hero-content" data-aos="fade-up" data-aos-delay="200">
+          <h1 class="hero-title">Track COVID-19 in Canada</h1>
+          <p class="hero-subtitle">Real-time data and comprehensive insights on coronavirus cases, recoveries, and
+            vaccinations across Canada</p>
+          <div class="d-flex flex-wrap gap-3">
+            <button onclick="button1()" class="btn btn-primary-modern btn-modern">
+              <i class="bi bi-graph-up me-2"></i>Data Tracker
+            </button>
+            <button onclick="button2()" class="btn btn-outline-modern btn-modern">
+              <i class="bi bi-shield-check me-2"></i>Vaccination Tracker
+            </button>
+            <button onclick="button3()" class="btn btn-outline-modern btn-modern">
+              <i class="bi bi-clipboard-check me-2"></i>Test Tracker
+            </button>
           </div>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="warning-card">
+      <div class="d-flex align-items-start">
+        <i class="bi bi-exclamation-triangle-fill text-danger fs-1 me-3"></i>
+        <div>
+          <h4 class="text-danger mb-3">Important Notice</h4>
+          <p class="mb-3">For the most up-to-date information regarding COVID-19 in Canada, please consult the
+            <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html"
+              target="_blank" class="text-primary fw-bold">
+              Canada Department of Health
+            </a>.
+          </p>
+          <p class="mb-0 text-muted">This site should not be used for life-saving information. Instead, it serves as a
+            source for numbers and statistics.</p>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
-<div id="inner"></div>
-<div class="alerts-banner">
-  <h3 style="font-size: 15px;"> <span style="color: lightslategray; font-size: 20px;"><i style="color: white;" class="bi bi-info-circle-fill"></i></span> Updated Daily: <a style="border-radius: 5px; font-size: 15px;" class="btn btn-primary" type="btn" href="dataTracker.html">View our work on COVID-19 vaccinations</a></h3>
-</div>
- 
- <header>
-   <h2>Research and data to make progress against the world’s largest problems</h2>
-   <p id="headerp">Explore the global data on confirmed COVID-19</p>
-   <div class="container">
-  <div class="row">
-    <div class="col">
-      <button onclick="button1()" style="border-radius: 5px; color: white;" class="btn btn-primary">Data Tracker (Coronavirus)</button>
+
+
+
+  <header>
+    <h2>Research and data to make progress against the world’s largest problems</h2>
+    <p id="headerp">Explore the global data on confirmed COVID-19</p>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <button onclick="button1()" style="border-radius: 5px; color: white;" class="btn btn-primary">Data Tracker
+            (Coronavirus)</button>
+        </div>
+        <div class="col">
+          <button onclick="button2()" style="border-radius: 5px; color: white;" class="btn btn-primary">Vaccination
+            Tracker</button>
+        </div>
+        <div class="col">
+          <button onclick="button3()" style="border-radius: 5px; color: white;" class="btn btn-primary">Covid Test
+            Tracker</button>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <button onclick="button2()" style="border-radius: 5px; color: white;" class="btn btn-primary">Vaccination Tracker</button>
+  </header>
+
+  <br>
+
+  <div class="container-sm information-from-province">
+    <span style="font-size: 30px; font-weight: bold;"><i class="bi bi-exclamation-triangle-fill"></i> Attention</span>
+    <h3>For the most up to date information regarding COVID-19 in Canada, please consult <a
+        href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html">Canada
+        Deptartment of Health</a>. This site should not be used for life saving information - instead, rather, a source
+      for numbers and statistics.</h3>
+  </div>
+
+  <br>
+
+  <!-- Statistics Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="text-center mb-5">
+      <h2 class="section-title">COVID-19 Statistics for Canada</h2>
+      <p class="text-muted">Real-time data updated daily</p>
     </div>
-    <div class="col">
-      <button onclick="button3()" style="border-radius: 5px; color: white;" class="btn btn-primary">Covid Test Tracker</button>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card warning">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-virus text-warning fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Total Cases</div>
+              <div class="stats-number text-warning" id="cases">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card danger">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-hospital text-danger fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Hospitalized</div>
+              <div class="stats-number text-danger" id="hospitalized">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card success">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-heart-pulse text-success fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Recoveries</div>
+              <div class="stats-number text-success" id="recoveries">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card info">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-clipboard2-data text-info fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Deaths</div>
+              <div class="stats-number text-info" id="death">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card secondary">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-clipboard-check text-secondary fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Tests</div>
+              <div class="stats-number text-secondary" id="tests">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="stats-card info">
+          <div class="d-flex align-items-center mb-3">
+            <i class="bi bi-shield-check text-primary fs-2 me-3"></i>
+            <div>
+              <div class="stats-label">Doses Administered</div>
+              <div class="stats-number text-primary" id="dosesadministered">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
- </header>
 
-<br>
-
-<div class="container-sm information-from-province">
-  <span style="font-size: 30px; font-weight: bold;"><i class="bi bi-exclamation-triangle-fill"></i> Attention</span>
-   <h3>For the most up to date information regarding COVID-19 in Canada, please consult <a href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19.html">Canada Deptartment of Health</a>. This site should not be used for life saving information - instead, rather, a source for numbers and statistics.</h3>
-</div>
-
-<br>
-
-<div class="container">
-  <div class="row row-cols-4">
-    <div class="col"> <div class="card bg-warning mb-3" style="max-width: 20rem;">
-  <div class="card-header">Cases | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Cases</h4>
-    <p id="cases" class="card-text">.</p>
-  </div>
-</div></div>
-    <div class="col"> <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-  <div class="card-header">Hospitalized | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Hospitalized</h4>
-    <p id="hospitalized" class="card-text">.</p>
-  </div>
-</div></div>
-    <div class="col"> <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-  <div class="card-header">Recoveries | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Recoveries</h4>
-    <p id="recoveries" class="card-text">.</p>
-  </div>
-</div></div>
-    <div class="col"><div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Deaths | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Deaths</h4>
-    <p id="death" class="card-text">.</p>
-  </div>
-</div></div>
- <div class="col"> <div class="card text-black bg-secondary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Test | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Tests</h4>
-    <p id="tests" class="card-text">.</p>
-  </div>
-</div></div>
-<div class="col"> <div class="card text-black bg-secondary mb-3" style="max-width: 20rem;">
-  <div class="card-header">Doses Administered | Covid19Tracker</div>
-  <div class="card-body">
-    <h4 class="card-title">Doses Administered</h4>
-    <p id="dosesadministered" class="card-text">.</p>
-  </div>
-</div></div>
-  </div>
-</div>
-
-<br>
-<br>
-  
-  <div class="container mt-4 p-4">
-  <div class="row">
-    <div class="col align-self-start">
-      	<img class="img-responsive" src="/assets/img1.jpg" alt="" width="304" height="236">
+  <!-- Image Gallery Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="text-center mb-5">
+      <h2 class="section-title">COVID-19 Awareness</h2>
+      <p class="text-muted">Stay informed and stay safe</p>
     </div>
-    <div class="col align-self-center">
-      	<img class="img-responsive" src="/assets/img2.png" alt="" width="304" height="236">
-    </div>
-    <div class="col align-self-end">
-     	<img class="img-responsive" src="/assets/img3.jpg" alt="" width="304" height="236">
+
+    <div class="row g-4 image-gallery">
+      <div class="col-lg-4 col-md-6">
+        <img src="/assets/img1.jpg" alt="COVID-19 Prevention" class="img-fluid w-100"
+          style="height: 250px; object-fit: cover;">
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <img src="/assets/img2.png" alt="Health Guidelines" class="img-fluid w-100"
+          style="height: 250px; object-fit: cover;">
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <img src="/assets/img3.jpg" alt="Safety Measures" class="img-fluid w-100"
+          style="height: 250px; object-fit: cover;">
+      </div>
     </div>
   </div>
-</div>
 
-<div id="covid-info" class="container-sm mt-4 p-4">
-    <span style="font-size: 30px; font-weight: bold;"><i class="bi bi-info-lg"></i> Inforamtion About Coronavirus</span>
-  <h3>
-    Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
-Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without special treatment. However, some will become seriously ill and require medical attention.
-  </h3>
-</div>
-
-<br>
-<div class="footermedia">
-</div>
-<div id="inner1"></div>
-<div class="footer">
-  <div class="social">
-    <ul>
-      <span style="color: white;">|</span>
-      <li><a href="https://forms.gle/4ZBeajqRt5J1drBq8">Found an Issues</a></li>
-      <span style="color: white;">|</span>
-       <li><a href="mailto:joey@tech-center.com?subject=Mail Covid19Tracker-Canada">Email Us</a></li>
-        <span style="color: white;">|</span>
-    </ul>
+  <!-- Information Section -->
+  <div class="container my-5" data-aos="fade-up">
+    <div class="info-card">
+      <div class="d-flex align-items-start">
+        <i class="bi bi-info-circle-fill text-info fs-1 me-3"></i>
+        <div>
+          <h3 class="text-info mb-3">Information About Coronavirus</h3>
+          <p class="mb-0">
+            Coronavirus disease (COVID-19) is an infectious disease caused by the SARS-CoV-2 virus.
+            Most people who fall sick with COVID-19 will experience mild to moderate symptoms and recover without
+            special treatment.
+            However, some will become seriously ill and require medical attention.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-   <hr style="color: white;">
-  <h3>&copy; <script type="text/javascript">document.write(new Date().getFullYear())</script> Covid19Tracker</h3>
-  <p style="color: white; text-align: center;">Designed and built with <i style="color: pink;" class="bi bi-suit-heart-fill"></i>  in Montreal.   // Developed by <a href="https://techwithjoey.com">Joey Cadieux</a></p>
-</div>
 
-<script>
-  function button1() {
-    window.location.assign("https://covid-19trackercanada.netlify.app/dataTracker.html")
-  }
-  function button2() {
-    window.location.assign("https://covid-19trackercanada.netlify.app/")
-  }
-  function button3() {
-    window.location.assign("https://covid-19trackercanada.netlify.app/")
-  }
-</script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="social-links">
+        <a href="https://forms.gle/4ZBeajqRt5J1drBq8">
+          <i class="bi bi-bug me-2"></i>Report Issues
+        </a>
+        <a href="mailto:joey@tech-center.com?subject=Mail Covid19Tracker-Canada">
+          <i class="bi bi-envelope me-2"></i>Email Us
+        </a>
+      </div>
+
+      <hr class="border-light opacity-25">
+
+      <div class="text-center">
+        <h5 class="mb-3">
+          &copy;
+          <script type="text/javascript">document.write(new Date().getFullYear())</script> COVID-19 Tracker Canada
+        </h5>
+        <p class="mb-0">
+          Designed and built with <i class="bi bi-suit-heart-fill text-danger"></i> in Montreal
+          <br>
+          <small class="text-muted">Developed by <a href="https://techwithjoey.com" class="text-light">Joey
+              Cadieux</a></small>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Button navigation functions
+    function button1() {
+      window.location.assign("https://covid-19trackercanada.netlify.app/dataTracker.html")
+    }
+    function button2() {
+      window.location.assign("https://covid-19trackercanada.netlify.app/")
+    }
+    function button3() {
+      window.location.assign("https://covid-19trackercanada.netlify.app/")
+    }
+
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(31, 41, 55, 0.98)';
+      } else {
+        navbar.style.background = 'rgba(31, 41, 55, 0.95)';
+      }
+    });
+
+    // Add loading state for statistics
+    $(document).ready(function () {
+      // Add loading animation to stat numbers
+      const statElements = ['#cases', '#hospitalized', '#recoveries', '#death', '#tests', '#dosesadministered'];
+      statElements.forEach(element => {
+        $(element).html('<i class="bi bi-hourglass-split"></i> Loading...');
+      });
+    });
+  </script>
 
   <script src="/covidData/index.js"></script>
   <script src="/sites/all/js/script.js"></script>
   <script src="/sites/all/js/data/index.js"></script>
-	</script>
+  </script>
 </body>
 
 </html>
